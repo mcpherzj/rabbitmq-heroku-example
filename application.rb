@@ -18,10 +18,16 @@ class Application < Sinatra::Application
   def initialize *opts
     super *opts
 
-#    amqp_opts = parse_amqp_url(settings.amqp_url)
-#    @b = Bunny.new(amqp_opts)
-#    @b.start
-#    @queue = @b.queue('test1')
+    puts "before amqp settings"
+    puts "settings are: " + settings.amqp_url.to_s
+    amqp_opts = parse_amqp_url(settings.amqp_url)
+    puts "got amqp opts"
+    @b = Bunny.new(amqp_opts)
+    puts "before start"
+    @b.start
+    puts "before setting queue name"
+    @queue = @b.queue('test1')
+    puts "after setting queue name"
   end
 
   get '/' do
@@ -29,16 +35,16 @@ class Application < Sinatra::Application
     'Go to <a href="/publish">/publish</a> or <a href="/receive">/receive</a>.'
   end
 
-#  get '/receive' do
-#    msg = @queue.pop[:payload]
-#    "received #{msg.inspect}"
-#  end
+  get '/receive' do
+    msg = @queue.pop[:payload]
+    "received #{msg.inspect}"
+  end
 
-#  get '/publish' do
-#    msg = "ping #{Time.new}"
-#    @queue.publish msg
-#    "published #{msg.inspect}"
-#  end
+  get '/publish' do
+    msg = "ping #{Time.new}"
+    @queue.publish msg
+    "published #{msg.inspect}"
+  end
   
 end
 
