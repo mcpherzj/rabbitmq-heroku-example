@@ -1,4 +1,3 @@
-# my first test comment
 
 begin
   # Require the preresolved locked set of gems.
