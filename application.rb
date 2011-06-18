@@ -10,8 +10,12 @@ end
 
 require 'sinatra/base'
 require 'bunny'
-require 'parse_amqp_url'
+#require 'sinatra'
 
+require './parse_amqp_url'
+
+#require 'rubygems'
+#require 'sinatra'
 
 class Application < Sinatra::Application
   def initialize *opts
@@ -24,6 +28,7 @@ class Application < Sinatra::Application
   end
 
   get '/' do
+    #'Hello World Stuff'
     'Go to <a href="/publish">/publish</a> or <a href="/receive">/receive</a>.'
   end
 
@@ -37,5 +42,6 @@ class Application < Sinatra::Application
     @queue.publish msg
     "published #{msg.inspect}"
   end
+  
 end
 
