@@ -14,7 +14,7 @@ require 'sinatra/base'
 require 'bunny'
 #require 'sinatra'
 
-require 'parse_amqp_url'
+require './parse_amqp_url'
 
 #require 'rubygems'
 #require 'sinatra'
