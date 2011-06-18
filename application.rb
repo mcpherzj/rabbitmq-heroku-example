@@ -11,21 +11,17 @@ end
 
 require 'sinatra/base'
 require 'bunny'
-#require 'sinatra'
 
 require './parse_amqp_url'
-
-#require 'rubygems'
-#require 'sinatra'
 
 class Application < Sinatra::Application
   def initialize *opts
     super *opts
 
-#    amqp_opts = parse_amqp_url(settings.amqp_url)
-#    @b = Bunny.new(amqp_opts)
-#    @b.start
-#    @queue = @b.queue('test1')
+    amqp_opts = parse_amqp_url(settings.amqp_url)
+    @b = Bunny.new(amqp_opts)
+    @b.start
+    @queue = @b.queue('test1')
   end
 
   get '/' do
@@ -33,16 +29,16 @@ class Application < Sinatra::Application
     'Go to <a href="/publish">/publish</a> or <a href="/receive">/receive</a>.'
   end
 
-#  get '/receive' do
-#    msg = @queue.pop[:payload]
-#    "received #{msg.inspect}"
-#  end
+  get '/receive' do
+    msg = @queue.pop[:payload]
+    "received #{msg.inspect}"
+  end
 
-#  get '/publish' do
-#    msg = "ping #{Time.new}"
-#    @queue.publish msg
-#    "published #{msg.inspect}"
-#  end
+  get '/publish' do
+    msg = "ping #{Time.new}"
+    @queue.publish msg
+    "published #{msg.inspect}"
+  end
   
 end
 
